@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+transformers
+torch
+easyocr
+Pillow
+numpy
+python-multipart
+httpx
+beautifulsoup4
