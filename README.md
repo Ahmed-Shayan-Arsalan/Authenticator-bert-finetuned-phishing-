@@ -5,21 +5,65 @@ Supports **text analysis** and **image analysis** (via OCR).
 
 ---
 
-## Model
+## Quick Start — Run These Commands First
 
-**Model:** [`ealvaradob/bert-finetuned-phishing`](https://huggingface.co/ealvaradob/bert-finetuned-phishing)  
-**License:** Apache 2.0  
-**Accuracy:** ~97.17%
+> **Do this once when you first clone/open the project.**  
+> Open a terminal in the project root and run each block in order.
 
-### Download the model
+### 1. Download the AI Model
 
-Run this once from the project root to download the model into the exact `Models/` directory the backend expects:
+> Run from the **project root** (`Malicious_Checker/`), not inside any subfolder.
 
 ```powershell
+pip install huggingface_hub
 python -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='ealvaradob/bert-finetuned-phishing', cache_dir='./Models')"
 ```
 
-This saves the model to:
+### 2. Install Backend Dependencies
+
+```powershell
+cd backend
+pip install -r requirements.txt
+cd ..
+```
+
+### 3. Install Frontend Dependencies
+
+```powershell
+cd frontend
+npm install
+cd ..
+```
+
+---
+
+## Running the App
+
+> Open **two separate terminals** — one for the backend, one for the frontend.
+
+**Terminal 1 — Backend:**
+```powershell
+cd backend
+uvicorn main:app --reload --port 8000
+```
+
+**Terminal 2 — Frontend:**
+```powershell
+cd frontend
+npm run dev
+```
+
+- Backend API: `http://localhost:8000`
+- Frontend app: `http://localhost:3000`
+
+---
+
+## Model Info
+
+**Model:** [`ealvaradob/bert-finetuned-phishing`](https://huggingface.co/ealvaradob/bert-finetuned-phishing)  
+**License:** Apache 2.0 | **Accuracy:** ~97.17%
+
+The model is downloaded into:
 ```
 Models/
 └── models--ealvaradob--bert-finetuned-phishing/
@@ -33,59 +77,7 @@ Models/
             └── vocab.txt
 ```
 
-> `huggingface_hub` is installed automatically as a dependency of `transformers`.
-
----
-
-## Backend Setup
-
-```powershell
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
-
-The API will be available at `http://localhost:8000`.
-
-### Virtual Environment (recommended)
-
-This project uses a shared virtual environment at `C:\Users\shaya\Desktop\True_VENV`.  
-Activate it before installing or running:
-
-```powershell
-C:\Users\shaya\Desktop\True_VENV\Scripts\Activate.ps1
-```
-
----
-
-## Frontend Setup
-
-```powershell
-cd frontend
-npm install
-npm run dev
-```
-
-The app will be available at `http://localhost:3000`.
-
----
-
-## Running the Full Stack
-
-Open two terminals and run both simultaneously:
-
-**Terminal 1 — Backend:**
-```powershell
-C:\Users\shaya\Desktop\True_VENV\Scripts\Activate.ps1
-cd backend
-uvicorn main:app --reload --port 8000
-```
-
-**Terminal 2 — Frontend:**
-```powershell
-cd frontend
-npm run dev
-```
+> The `Models/` folder is excluded from git. You must download the model locally.
 
 ---
 
