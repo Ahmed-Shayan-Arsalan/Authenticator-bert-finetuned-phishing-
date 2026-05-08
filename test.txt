@@ -1,0 +1,22 @@
+==============================
+MALICIOUS #1 — Toll Scam (E-ZPass Style)
+==============================
+URGENT NOTICE: Your E-ZPass account has an outstanding toll balance of $3.85. Failure to pay within 24 hours will result in a $35.00 late fee and suspension of your account. To avoid penalties, click here immediately: http://ezpass-tolls-pay.com/settle?id=88231. You MUST act NOW to avoid legal action and license suspension. Call 1-800-555-0192 if you have questions.
+
+
+==============================
+MALICIOUS #2 — Bank Phishing
+==============================
+Dear Valued Customer, We have detected unusual activity on your Bank of America account. Your account has been temporarily LIMITED. You must verify your identity within 12 hours or your account will be permanently suspended. Click the secure link below to restore full access: http://bankofamerica-secure-verify.net/login?token=A9F2K. WARNING: Ignoring this message will result in permanent account closure. Provide your SSN and card details to confirm your identity.
+
+
+==============================
+LEGITIMATE #1 — Standard Bank Notification
+==============================
+Hello, this is an automated notification from Chase Bank. A transaction of $42.00 was processed on your checking account ending in 4821 on May 3, 2026 at 2:14 PM. Merchant: Whole Foods Market. If you did not authorize this transaction, please call the number on the back of your card or visit chase.com to dispute it. No action is needed if this was you.
+
+
+==============================
+LEGITIMATE #2 — Package Delivery
+==============================
+Hi, your UPS package is on its way. Tracking number: 1Z999AA10123456784. Estimated delivery: Tuesday, May 5, 2026 by end of day. Your package will be left at the front door if no one is available. You can track your shipment at ups.com or in the UPS mobile app. If you have questions, visit the UPS Help Center at ups.com/help.

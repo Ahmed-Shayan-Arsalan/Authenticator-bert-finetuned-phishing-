@@ -112,6 +112,62 @@ def classify_text(text: str) -> dict:
     }
 
 
+def build_red_flags(label: str, score: float, signals: dict) -> list[str]:
+    """Translate raw signals into human-readable red flag sentences."""
+    flags: list[str] = []
+
+    if label == "phishing":
+        flags.append(
+            f"AI model classifies this content as phishing with {score}% confidence."
+        )
+    else:
+        flags.append(
+            f"AI model considers this content legitimate with {score}% confidence."
+        )
+
+    if signals.get("urgency_keywords"):
+        kws = ", ".join(f'"{k}"' for k in signals["urgency_keywords"])
+        flags.append(
+            f"Linguistic patterns match known 'Urgent Action' phishing templates — "
+            f"urgency keywords detected: {kws}."
+        )
+
+    if signals.get("threat_keywords"):
+        kws = ", ".join(f'"{k}"' for k in signals["threat_keywords"])
+        flags.append(
+            f"Threatening language consistent with coercion tactics — "
+            f"threat keywords detected: {kws}."
+        )
+
+    if signals.get("urls"):
+        count = len(signals["urls"])
+        flags.append(
+            f"{count} URL{'s' if count > 1 else ''} found in the content — "
+            "verify each link before clicking."
+        )
+
+    if signals.get("phones"):
+        count = len(signals["phones"])
+        flags.append(
+            f"{count} phone number{'s' if count > 1 else ''} extracted — "
+            "not yet verified against legitimate registries."
+        )
+
+    if signals.get("caps_ratio", 0) > 20:
+        flags.append(
+            f"Unusual capitalization detected ({signals['caps_ratio']}% of words fully uppercase) — "
+            "a common visual pressure tactic."
+        )
+
+    if signals.get("exclamation_marks", 0) >= 3:
+        flags.append(
+            f"High exclamation mark usage ({signals['exclamation_marks']}) — "
+            "often used to manufacture urgency."
+        )
+
+    return flags
+
+
 # --- Models ---
 
 class TextRequest(BaseModel):
@@ -139,11 +195,13 @@ async def analyze_text(body: TextRequest):
 
     result = classify_text(text)
     signals = extract_signals(text)
+    red_flags = build_red_flags(result["label"], result["score"], signals)
     return {
         "label": result["label"],
         "score": result["score"],
         "input_text": text,
         "signals": signals,
+        "red_flags": red_flags,
     }
 
 
@@ -203,12 +261,14 @@ async def analyze_url(body: UrlRequest):
 
     result = classify_text(truncated)
     signals = extract_signals(truncated)
+    red_flags = build_red_flags(result["label"], result["score"], signals)
     return {
         "label": result["label"],
         "score": result["score"],
         "url": raw_url,
         "extracted_text": truncated,
         "signals": signals,
+        "red_flags": red_flags,
     }
 
 
@@ -235,9 +295,11 @@ async def analyze_image(file: UploadFile = File(...)):
 
     result = classify_text(extracted_text)
     signals = extract_signals(extracted_text)
+    red_flags = build_red_flags(result["label"], result["score"], signals)
     return {
         "label": result["label"],
         "score": result["score"],
         "extracted_text": extracted_text,
         "signals": signals,
+        "red_flags": red_flags,
     }

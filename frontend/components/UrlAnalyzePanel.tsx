@@ -11,6 +11,7 @@ interface AnalysisResult {
   extracted_text: string
   signals: Signals | null
   message?: string
+  red_flags?: string[]
 }
 
 export default function UrlAnalyzePanel() {
@@ -206,6 +207,23 @@ export default function UrlAnalyzePanel() {
               <p className="text-[#888] text-sm bg-[#0d0d0d] border border-[#1e1e1e] rounded-xl p-4 leading-relaxed whitespace-pre-wrap break-words max-h-48 overflow-y-auto">
                 {result.extracted_text.slice(0, 800)}{result.extracted_text.length > 800 ? '…' : ''}
               </p>
+            </div>
+          )}
+
+          {/* Red Flags */}
+          {result.red_flags && result.red_flags.length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[11px] font-semibold text-[#444] uppercase tracking-widest">
+                Why flagged
+              </p>
+              <ul className="space-y-1.5">
+                {result.red_flags.map((flag, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-[#888] leading-relaxed">
+                    <span className={`mt-1 shrink-0 text-xs ${isPhishing ? 'text-red-800' : 'text-[#4a7a4a]'}`}>—</span>
+                    <span>{flag}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 

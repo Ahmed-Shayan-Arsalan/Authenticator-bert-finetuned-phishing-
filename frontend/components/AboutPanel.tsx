@@ -86,7 +86,7 @@ export default function AboutPanel() {
         </h2>
         <ul className="space-y-2 text-sm text-[#888]">
           {[
-            'Urgency and threat language — demands for immediate payment or action',
+            "Linguistic patterns match known 'Urgent Action' by looking at phishing templates/patterns.",
             'Suspicious URLs — domains impersonating official organizations',
             'Grammar and phrasing anomalies — unusual wording or spelling errors',
             'Unsolicited contact patterns — unexpected requests for personal or financial data',
